@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "androidkivyapp"
+version = "0.1.0"
+description = ""
+authors = ["Diakon5 <72417806+Diakon5@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.11.7"
+kivy = "^2.3.0"
+kivy-reloader = "^0.3.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
