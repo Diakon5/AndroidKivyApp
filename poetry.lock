@@ -503,13 +503,13 @@ requests = "*"
 
 [[package]]
 name = "kivy-reloader"
-version = "0.3.1"
+version = "0.3.2"
 description = "Hot reload your Kivy app on multiple Android phones and computer in real-time."
 optional = false
 python-versions = "<4.0,>=3.10"
 files = [
-    {file = "kivy_reloader-0.3.1-py3-none-any.whl", hash = "sha256:e01519c828bb21a56525d1fa60315cd7852c3aeb781915c24ed933839c16a739"},
-    {file = "kivy_reloader-0.3.1.tar.gz", hash = "sha256:2b6ca9739aba413b841509a700e6165aa1ac9cb7dbb616119824c5c8c522b00f"},
+    {file = "kivy_reloader-0.3.2-py3-none-any.whl", hash = "sha256:71734373d7074fcf1dbb137288bca5ee35bb82e33d37c57e0fbbaa1e30287b26"},
+    {file = "kivy_reloader-0.3.2.tar.gz", hash = "sha256:7854c7da3937d613059ad4e4d5291e11badf6d0a64348c7bf4440ebbaef8eb00"},
 ]
 
 [package.dependencies]
