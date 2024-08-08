@@ -9,6 +9,7 @@ readme = "README.md"
 python = "3.11.7"
 kivy = "^2.3.0"
 kivy-reloader = "^0.3.1"
+aiosqlite = "^0.20.0"
 
 
 [build-system]
