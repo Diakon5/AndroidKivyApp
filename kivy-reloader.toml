@@ -25,7 +25,7 @@ WATCHED_FOLDERS_RECURSIVELY = ["mobileApp"]
 # Add the folders where you have your .kv files here
 # If you don't put them here, the .kv files won't be reloaded
 # this is recursive, i.e., it will watch all folders inside the folders you put here
-WATCHED_KV_FOLDERS_RECURSIVELY = []
+WATCHED_KV_FOLDERS_RECURSIVELY = ["mobileApp"]
 
 # Watched folders but not recursively, i.e., **ANY FILE** inside the first level of the folder
 WATCHED_FOLDERS = []
