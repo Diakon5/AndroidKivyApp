@@ -1,0 +1,46 @@
+#:kivy 1.0
+#:import join os.path.join
+#:import getcwd os.getcwd
+#:set imageDir join(getcwd(),"mobileApp/images")
+
+<MainScreen>:
+    name: 'MainScreen'
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: "5px"
+        padding: "10px"
+        #size_hint_y: None
+        #height: self.minimum_height
+        Label:
+            size_hint_y: None
+            size: self.texture_size
+            text: "BUDGET ASSISTANT"
+            halign: "center"
+            font_size: 35
+            text_size: root.width, None
+        Image:
+            source: join(imageDir,"missing.png")
+            #texture : Texture.create(size = (800,800),)
+            size: self.texture_size
+            fit_mode: "contain"
+        ScrollView:
+            BoxLayout:
+                orientation: 'vertical'
+                spacing: "5px"
+                size_hint_y: None
+                height: self.minimum_height
+                Button:
+                    text: "Subject 1"
+                    size_hint_y: None
+                    height: dp(60)
+                    on_press:
+                        root.manager.current = "DashboardScreen"
+                Button:
+                    text: "Subject 2"
+                    size_hint_y: None
+                    height: dp(60)
+                Button:
+                    text: "New..."
+                    size_hint_y: None
+                    height: dp(60)

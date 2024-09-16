@@ -1,13 +1,13 @@
 [app]
 
 # (str) Title of your application
-title = Kivy Reloader
+title = Budget Manager
 
 # (str) Package name
-package.name = kivy_reloader
+package.name = budget_manager
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = org.example
+package.domain = priv.example
 
 # (str) Source code where the main.py live
 source.dir = .
@@ -19,10 +19,10 @@ source.include_exts = py,png,jpg,kv,atlas,toml
 #source.include_patterns = assets/*,images/*.png
 
 # (list) Source files to exclude (let empty to not exclude anything)
-source.exclude_exts = app_copy.zip
+source.exclude_exts = app_copy.zip, .gitattributes, .gitignore
 
 # (list) List of directory to exclude (let empty to not exclude anything)
-source.exclude_dirs = temp, bin, dist, .venv, __pycache__
+source.exclude_dirs = temp, bin, dist, .venv, __pycache__, .vscode
 
 # (list) List of exclusions using pattern matching
 # Do not prefix with './'

@@ -1,0 +1,46 @@
+#:kivy 1.0
+#:import join os.path.join
+#:import getcwd os.getcwd
+#:set imageDir join(getcwd(),"mobileApp/images")
+
+<DashboardScreen>:
+    name: 'DashboardScreen'
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: "5px"
+        padding: "10px"
+        #size_hint_y: None
+        #height: self.minimum_height
+        Label:
+            size_hint_y: None
+            size: self.texture_size
+            text: "Dashboard"
+            halign: "left"
+            font_size: 25
+            text_size: self.width, None
+        Label:
+            size_hint_y: None
+            size: self.texture_size
+            text: "Dashboard"
+            halign: "left"
+            font_size: 25
+            text_size: self.width, None
+        ScrollView:
+            GridLayout:
+                spacing: dp(8)
+                #size_hint_y: None
+                cols: 2
+                #height: self.minimum_height
+                Button:
+                    text: "All"
+                    size_hint: None, 1
+                    width: self.height
+                Button:
+                    text: "Fuel"
+                    size_hint: None, 1
+                    width: self.height
+                Button:
+                    text: "Other"
+                    size_hint: None, 1
+                    width: self.height

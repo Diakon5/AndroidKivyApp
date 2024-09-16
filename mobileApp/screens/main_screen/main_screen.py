@@ -9,5 +9,5 @@ class MainScreen(Screen):
     def on_enter(self, *args):
         print("MainScreen on_enter")
 
-main_screen_kv = os.path.join("mobileApp", "screens", "main_screen.kv")
+main_screen_kv = os.path.join("mobileApp", "screens","main_screen", "main_screen.kv")
 load_kv_path(main_screen_kv)
