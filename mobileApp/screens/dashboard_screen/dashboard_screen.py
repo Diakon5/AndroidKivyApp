@@ -9,5 +9,5 @@ class DashboardScreen(Screen):
     def on_enter(self, *args):
         print("DashboardScreen on_enter")
 
-main_screen_kv = os.path.join("mobileApp", "screens","dashboard_screen", "dashboard_screen.kv")
-load_kv_path(main_screen_kv)
+dashboard_screen_kv = os.path.join("mobileApp", "screens","dashboard_screen", "dashboard_screen.kv")
+load_kv_path(dashboard_screen_kv)
