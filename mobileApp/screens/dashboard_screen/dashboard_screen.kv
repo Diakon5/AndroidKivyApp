@@ -36,6 +36,8 @@
                     text: "All"
                     size_hint: 1, None
                     height: self.width
+                    on_press:
+                        root.manager.current = "ExpensesScreen"
                 Button:
                     text: "Fuel"
                     size_hint: 1, None
