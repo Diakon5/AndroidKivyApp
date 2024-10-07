@@ -20,20 +20,20 @@
             font_size: 25
             text_size: self.width, None
         ScrollView:
-            GridLayout:
+            BoxLayout:
+                canvas:
+                    Color:
+                        rgba: 0.2, 0.4, 0, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
                 spacing: dp(15)
+                orientation: "vertical"
                 size_hint_y: None
-                cols: 2
                 height: self.minimum_height
-                Button:
-                    text: "All"
+                Label:
+                    text:"Hello Cost"
                     size_hint: 1, None
-                    height: self.width
-                Button:
-                    text: "Fuel"
-                    size_hint: 1, None
-                    height: self.width
-                Button:
-                    text: "Other"
-                    size_hint: 1, None
-                    height: self.width
+                    text_size: self.width, None
+                    height: dp(40)
+                    
