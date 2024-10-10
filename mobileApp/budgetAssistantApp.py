@@ -5,5 +5,3 @@ from .screens.main_manager import MainManager
 class MainApp(App):
     def build(self):
         return MainManager()
-
-app = MainApp()
