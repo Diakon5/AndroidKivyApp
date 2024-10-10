@@ -1,1 +1,1 @@
-from .budgetAssistantApp import app
+from .budgetAssistantApp import MainApp
