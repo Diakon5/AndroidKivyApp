@@ -1,10 +1,11 @@
 import trio
 
 from mobileApp import MainApp
-from kivy.core.window import Window
-from sys import platform
+
+from kivy.utils import platform
 
 if platform == "linux":
+    from kivy.core.window import Window
     Window.size = (360, 360*18/9)
 
 app = MainApp()
