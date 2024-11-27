@@ -93,8 +93,8 @@ fullscreen = 0
 #icon.adaptive_background.filename = %(source.dir)s/data/icon_bg.png
 
 # (list) Permissions
-android.permissions = INTERNET, (name=android.permission.WRITE_EXTERNAL_STORAGE;maxSdkVersion=18)
-
+# android.permissions = INTERNET , (name=android.permission.WRITE_EXTERNAL_STORAGE;maxSdkVersion=18),(name=android.permission.READ_EXTERNAL_STORAGE;maxSdkVersion=)
+android.permissions = INTERNET ,
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host
 
@@ -254,7 +254,7 @@ android.add_gradle_repositories =
 #android.uses_library =
 
 # (str) Android logcat filters to use
-#android.logcat_filters = *:S python:D
+android.logcat_filters = *:S python:D
 
 # (bool) Android logcat only display log for activity's pid
 #android.logcat_pid_only = False
