@@ -13,19 +13,6 @@ import trio
 
 class MainApp(App):
 
-    # async def async_run(self, async_lib = "trio"):
-    #     async with trio.open_nursery() as nursery:
-    #         self.nursery = nursery # note this
-    #         await super().async_run(async_lib=async_lib)
-    #         nursery.cancel_scope.cancel()
-
-    async def async_run(self, async_lib = "trio"):
-        async with trio.open_nursery() as nursery:
-            self.nursery = nursery # note this
-            self._run_prepare()
-            await async_runTouchApp(async_lib=async_lib)
-            self._stop()
-            nursery.cancel_scope.cancel()
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.internal_storage_path = join(getcwd(),"debugStorage")
