@@ -2,9 +2,11 @@
 #:import getcwd os.getcwd
 #:set imageDir join(getcwd(),"mobileApp/images")
 
+
+
 <MainScreen>:
     name: 'MainScreen'
-
+    vehicleListScroll:outputscroll
     BoxLayout:
         orientation: 'vertical'
         spacing: dp(10)
@@ -29,6 +31,7 @@
                 spacing: "5px"
                 size_hint_y: None
                 height: self.minimum_height
+                id:outputscroll
                 Button:
                     text: "Subject 1"
                     size_hint_y: None
@@ -36,10 +39,7 @@
                     on_press:
                         root.manager.current = "DashboardScreen"
                 Button:
-                    text: "Subject 2"
-                    size_hint_y: None
-                    height: dp(60)
-                Button:
+                    id:addRowButton
                     text: "New..."
                     size_hint_y: None
                     height: dp(60)
