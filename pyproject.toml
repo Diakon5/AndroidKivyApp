@@ -10,7 +10,8 @@ package-mode = false
 python = "3.11.7"
 kivy = "^2.3.0"
 kivy-reloader = ">=0.4.0"
-aiosqlite = ">=0.20.0"
+anysqlite = "^0.0.5"
+anyio = "4.0.0"
 
 
 [build-system]
