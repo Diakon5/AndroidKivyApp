@@ -2,7 +2,13 @@
 #:import getcwd os.getcwd
 #:set imageDir join(getcwd(),"mobileApp/images")
 
-
+<MyButt@ButtonBehavior+BoxLayout>: #For later
+    t1: ""
+    t2: ""
+    Label:
+        text: root.t1
+    Label:
+        text: root.t2
 
 <MainScreen>:
     name: 'MainScreen'
@@ -11,8 +17,6 @@
         orientation: 'vertical'
         spacing: dp(10)
         padding: dp(15)
-        #size_hint_y: None
-        #height: self.minimum_height
         Label:
             size_hint_y: None
             size: self.texture_size
@@ -22,7 +26,6 @@
             text_size: root.width, None
         Image:
             source: join(imageDir,"missing.png")
-            #texture : Texture.create(size = (800,800),)
             size: self.texture_size
             fit_mode: "contain"
         ScrollView:
@@ -43,3 +46,6 @@
                     text: "New..."
                     size_hint_y: None
                     height: dp(60)
+                    on_press:
+                        root.addNewCar()
+
