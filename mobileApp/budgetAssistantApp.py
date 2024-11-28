@@ -1,4 +1,5 @@
 #from kivy_reloader.app import App
+from kivy.base import async_runTouchApp
 from kivy.app import App
 from .screens.main_manager import MainManager
 from kivy.utils import platform
@@ -11,10 +12,19 @@ from os.path import join
 import trio
 
 class MainApp(App):
+
+    # async def async_run(self, async_lib = "trio"):
+    #     async with trio.open_nursery() as nursery:
+    #         self.nursery = nursery # note this
+    #         await super().async_run(async_lib=async_lib)
+    #         nursery.cancel_scope.cancel()
+
     async def async_run(self, async_lib = "trio"):
         async with trio.open_nursery() as nursery:
             self.nursery = nursery # note this
-            await super().async_run('trio')
+            self._run_prepare()
+            await async_runTouchApp(async_lib=async_lib)
+            self._stop()
             nursery.cancel_scope.cancel()
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
