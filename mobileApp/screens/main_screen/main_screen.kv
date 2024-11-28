@@ -28,24 +28,26 @@
             source: join(imageDir,"missing.png")
             size: self.texture_size
             fit_mode: "contain"
-        ScrollView:
-            BoxLayout:
-                orientation: 'vertical'
-                spacing: "5px"
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: "5px"
+            size_hint_y: None
+            height: self.minimum_height
+            id:outputscroll
+            RecycleView:
+                data: [{'text':"{}".format(name)} for name in root.rows]
+                viewclass: "Label"
+                RecycleBoxLayout:
+                    default_size: None, dp(60)
+                    default_size_hint: 1, None
+                    size_hint_y: None
+                    height: self.minimum_height
+                    orientation: 'vertical'
+            Button:
+                id:addRowButton
+                text: "New..."
                 size_hint_y: None
-                height: self.minimum_height
-                id:outputscroll
-                Button:
-                    text: "Subject 1"
-                    size_hint_y: None
-                    height: dp(60)
-                    on_press:
-                        root.manager.current = "DashboardScreen"
-                Button:
-                    id:addRowButton
-                    text: "New..."
-                    size_hint_y: None
-                    height: dp(60)
-                    on_press:
-                        root.addNewCar()
+                height: dp(60)
+                on_press:
+                    root.addNewCar()
 
