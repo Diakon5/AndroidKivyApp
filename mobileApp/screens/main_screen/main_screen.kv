@@ -5,6 +5,7 @@
 <MyButt@ButtonBehavior+BoxLayout>: #For later
     t1: ""
     t2: ""
+    orientation: 'horizontal'
     Label:
         text: root.t1
     Label:
@@ -35,7 +36,7 @@
             height: self.minimum_height
             id:outputscroll
             RecycleView:
-                data: [{'text':"{}".format(name)} for name in root.rows]
+                data: [{'text':"Name {}".format(name)} for name in root.rows]
                 viewclass: "Label"
                 RecycleBoxLayout:
                     default_size: None, dp(60)
@@ -49,5 +50,5 @@
                 size_hint_y: None
                 height: dp(60)
                 on_press:
-                    root.addNewCar()
+                    app.nursery.start_soon(root.addNewCar)
 

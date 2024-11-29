@@ -30,7 +30,6 @@ class MainApp(App):
                 return
             await cursor.execute("SELECT version FROM schema_meta;")
             version = await cursor.fetchone()
-            print(version)
             if version[0] != schema_version:
                 #include schema updating code later
                 pass
@@ -51,7 +50,8 @@ class MainApp(App):
     async def db_read_single_table(self, table : str, columns: str, filter: str = "1=1"):
         cursor = await self.conn.cursor()
         await cursor.execute(f"SELECT {columns} FROM {table} WHERE ?",(filter,))
-
+        values = await cursor.fetchall()
+        return values
     async def db_write(self):
         pass
 
