@@ -1,8 +1,10 @@
-from kivy_reloader.app import App
-#from kivy.base import async_runTouchApp
-#from kivy.app import App
+# from kivy_reloader.app import App
+from kivy.base import async_runTouchApp
+from kivy.app import App
+import trio
 from .screens.main_manager import MainManager
 from kivy.utils import platform
+from kivy.properties import ListProperty
 from kivy.cache import Clock
 import anysqlite as sqlite
 from functools import partial
@@ -12,6 +14,18 @@ from .db_schema import schema_version, schema_sql
 
 class MainApp(App):
 
+    something = ListProperty()
+    # async def async_run(self, async_lib="trio"):
+
+    #     async with trio.open_nursery() as nursery:
+    #         print("pre nursery")
+    #         self.nursery = nursery
+    #         print("post nursery")
+    #         self._run_prepare()
+    #         await async_runTouchApp(async_lib=async_lib)
+    #         self._stop()
+    #         nursery.cancel_scope.cancel()
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.internal_storage_path = join(getcwd(),"debugStorage")
@@ -20,7 +34,9 @@ class MainApp(App):
             self.internal_storage_path = app_storage_path()
 
     async def db_open(self,dt=0):
+        print("OPENING DATABASE")
         self.conn = await sqlite.connect(join(self.internal_storage_path,"storage.sqlite"))
+        print("DATABASE IS OPEN")
         try:
             cursor = await self.conn.cursor()
             await cursor.execute("SELECT name FROM sqlite_schema WHERE name='schema_meta'")
@@ -63,4 +79,5 @@ class MainApp(App):
 
     def build(self):
         Clock.schedule_once(partial(self.nursery.start_soon,self.db_open))
+        print("app_build")
         return MainManager()
