@@ -1,15 +1,14 @@
-#from kivy_reloader.app import App
-from kivy.base import async_runTouchApp
-from kivy.app import App
+from kivy_reloader.app import App
+#from kivy.base import async_runTouchApp
+#from kivy.app import App
 from .screens.main_manager import MainManager
 from kivy.utils import platform
 from kivy.cache import Clock
 import anysqlite as sqlite
 from functools import partial
-#import sqlite3 as sqlite
 from os import getcwd
 from os.path import join
-import trio
+from .db_schema import schema_version, schema_sql
 
 class MainApp(App):
 
@@ -19,24 +18,49 @@ class MainApp(App):
         if platform == "android":
             from android.storage import app_storage_path # type: ignore
             self.internal_storage_path = app_storage_path()
-    async def db_init(self,dt=0):
-        print(join(self.internal_storage_path,"storage.sqlite"))
+
+    async def db_open(self,dt=0):
         self.conn = await sqlite.connect(join(self.internal_storage_path,"storage.sqlite"))
+        try:
+            cursor = await self.conn.cursor()
+            await cursor.execute("SELECT name FROM sqlite_schema WHERE name='schema_meta'")
+            meta = await cursor.fetchone()
+            if meta == None:
+                await self.db_init()
+                return
+            await cursor.execute("SELECT version FROM schema_meta;")
+            version = await cursor.fetchone()
+            print(version)
+            if version[0] != schema_version:
+                #include schema updating code later
+                pass
+        except sqlite.OperationalError as e:
+            print("Sqlite Error:", e.sqlite_errorname)
+        except Exception as e:
+            print("unknown error:", e.args)
+        finally:
+            await cursor.close()
+
+    async def db_init(self,dt=0):
         cursor = await self.conn.cursor()
-        
-        await cursor.executescript('''BEGIN;
-                                   CREATE TABLE IF NOT EXISTS managed_vehicles_list (vehicle_id INTEGER PRIMARY KEY AUTOINCREMENT, vehicle_display_name TEXT);
-                                   CREATE TABLE IF NOT EXISTS documents (document_id INTEGER PRIMARY KEY AUTOINCREMENT, document_scan_date DATETIME, document_print_date DATETIME, document_sum_cache DECIMAL);
-                                   CREATE TABLE IF NOT EXISTS document_rows (row_id INTEGER PRIMARY KEY AUTOINCREMENT, document_id INTEGER, purchase_category INT, purchase_name TEXT, purchase_price INT, FOREIGN KEY(document_id) REFERENCES documents(document_id));
-                                   COMMIT;''')
-    async def db_read(self):
-        pass
+        command = str.join(";",schema_sql)
+        await cursor.executescript(f"BEGIN;{command};COMMIT;") #This isn't recommended but the schema_sql has no user input, so it should be fine
+        await cursor.executescript("BEGIN;INSERT INTO schema_meta VALUES (1);COMMIT;")
+        await cursor.close()
+
+    async def db_read_single_table(self, table : str, columns: str, filter: str = "1=1"):
+        cursor = await self.conn.cursor()
+        await cursor.execute(f"SELECT {columns} FROM {table} WHERE ?",(filter,))
+
     async def db_write(self):
         pass
+
     async def db_edit(self):
         pass
+
     async def db_remove(self):
         pass
+
     def build(self):
-        Clock.schedule_once(partial(self.nursery.start_soon,self.db_init))
+        Clock.schedule_once(partial(self.nursery.start_soon,self.db_open))
         return MainManager()
