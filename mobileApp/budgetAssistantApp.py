@@ -1,10 +1,10 @@
-# from kivy_reloader.app import App
-from kivy.base import async_runTouchApp
-from kivy.app import App
-import trio
+from kivy_reloader.app import App
+#from kivy.base import async_runTouchApp
+#from kivy.app import App
+#import trio
 from .screens.main_manager import MainManager
 from kivy.utils import platform
-from kivy.properties import ListProperty
+from kivy.properties import BooleanProperty
 from kivy.cache import Clock
 import anysqlite as sqlite
 from functools import partial
@@ -14,7 +14,7 @@ from .db_schema import schema_version, schema_sql
 
 class MainApp(App):
 
-    something = ListProperty()
+    dbReady = BooleanProperty(False)
     # async def async_run(self, async_lib="trio"):
 
     #     async with trio.open_nursery() as nursery:
@@ -49,6 +49,7 @@ class MainApp(App):
             if version[0] != schema_version:
                 #include schema updating code later
                 pass
+            self.dbReady = True
         except sqlite.OperationalError as e:
             print("Sqlite Error:", e.sqlite_errorname)
         except Exception as e:
