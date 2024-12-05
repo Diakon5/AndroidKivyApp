@@ -23,7 +23,7 @@
     name: 'MainScreen'
     db_ready: app.db_ready
     on_db_ready:
-        app.nursery.start_soon(self.listCars)
+        app.nursery.start_soon(self.list_cars)
     BoxLayout:
         orientation: 'vertical'
         spacing: dp(10)

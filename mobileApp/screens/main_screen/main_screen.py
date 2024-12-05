@@ -14,7 +14,7 @@ from kivy.app import App
 
 class MainScreen(Screen):
     rows = ListProperty([("id","Loading Data, please wait")])
-    async def listCars(self, dt=0): ##To future self: ALWAYS TRY EXCEPT YOUR CALLS MORON
+    async def list_cars(self, dt=0): ##To future self: ALWAYS TRY EXCEPT YOUR CALLS MORON
         try:
             print("TRYING TO LIST")
             app : MainApp = App.get_running_app() 
@@ -28,7 +28,6 @@ class MainScreen(Screen):
         print("TRYING TO ADD")
         app : MainApp = App.get_running_app() 
         try:
-            
             self.rows.append(("*","Car1"))
             await app.db_write("managed_vehicles_list",({"vehicle_display_name":"Car1"}))
         except Exception as e:
