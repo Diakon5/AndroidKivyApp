@@ -24,6 +24,15 @@ class MainScreen(Screen):
             print("CONNECTED")
         except Exception as e:
             print("Exception", e.args)
+    async def add_new_car(self,dt=0):
+        print("TRYING TO ADD")
+        app : MainApp = App.get_running_app() 
+        try:
+            
+            self.rows.append(("*","Car1"))
+            await app.db_write("managed_vehicles_list",({"vehicle_display_name":"Car1"}))
+        except Exception as e:
+            print(e.args)
     def on_enter(self, *args):
         app : MainApp = App.get_running_app()
         print("MainScreen on_enter")

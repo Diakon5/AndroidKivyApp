@@ -14,9 +14,8 @@ from .db_schema import schema_version, schema_sql
 
 class MainApp(App):
 
-    dbReady = BooleanProperty(False)
+    db_ready = BooleanProperty(False)
     # async def async_run(self, async_lib="trio"):
-
     #     async with trio.open_nursery() as nursery:
     #         print("pre nursery")
     #         self.nursery = nursery
@@ -49,7 +48,7 @@ class MainApp(App):
             if version[0] != schema_version:
                 #include schema updating code later
                 pass
-            self.dbReady = True
+            self.db_ready = True
         except sqlite.OperationalError as e:
             print("Sqlite Error:", e.sqlite_errorname)
         except Exception as e:
@@ -69,8 +68,17 @@ class MainApp(App):
         await cursor.execute(f"SELECT {columns} FROM {table} WHERE ?",(filter,))
         values = await cursor.fetchall()
         return values
-    async def db_write(self):
-        pass
+    async def db_write(self, table: str, values: tuple[dict[str,str]]):
+        cursor = await self.conn.cursor()
+        first_dict: set = values[0].keys()
+        columns = str.join(", ",first_dict)
+        params = str.join(", ",[f":{x}" for x in first_dict])
+        print(columns, params)
+        #values = self.sanitize(values)
+        await cursor.executemany(f"INSERT INTO {table} ({columns}) VALUES ({params});", values)
+        await cursor.execute("COMMIT;") #
+
+        await cursor.close()
 
     async def db_edit(self):
         pass

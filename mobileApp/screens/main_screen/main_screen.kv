@@ -16,13 +16,13 @@
     height: dp(60)
     mainscreen: None
     on_press:
-        app.nursery.start_soon(root.mainscreen.listCars)
+        app.nursery.start_soon(root.mainscreen.add_new_car)
 
 
 <MainScreen>:
     name: 'MainScreen'
-    dbReady: app.dbReady
-    on_dbReady:
+    db_ready: app.db_ready
+    on_db_ready:
         app.nursery.start_soon(self.listCars)
     BoxLayout:
         orientation: 'vertical'
