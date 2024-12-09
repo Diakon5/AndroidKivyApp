@@ -1,11 +1,10 @@
-from typing import TYPE_CHECKING
-
-import kivy.properties
-
-if TYPE_CHECKING:
-    from ...budgetAssistantApp import MainApp
-import os
 import kivy
+if kivy.utils.platform != "android":
+    from typing import TYPE_CHECKING
+    if TYPE_CHECKING:
+        from ...budgetAssistantApp import MainApp
+import os
+
 from kivy.factory import Factory
 from kivy.uix.screenmanager import Screen
 from kivy.properties import ListProperty
