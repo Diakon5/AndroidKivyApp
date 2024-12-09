@@ -30,7 +30,13 @@ class MainApp(App):
         self.internal_storage_path = join(getcwd(),"debugStorage")
         if platform == "android":
             from android.storage import app_storage_path # type: ignore
-            self.internal_storage_path = app_storage_path()
+            from android import mActivity # type: ignore
+            context = mActivity.getApplicationContext()
+            result =  context.getExternalFilesDir(None)   # don't forget the argument
+            if result:
+                self.internal_storage_path = str(result.toString())
+            else:
+                self.internal_storage_path = app_storage_path()
 
     async def db_open(self,dt=0):
         print("OPENING DATABASE")
