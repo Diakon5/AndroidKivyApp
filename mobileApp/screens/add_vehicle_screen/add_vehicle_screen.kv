@@ -4,15 +4,49 @@
 
 <AddVehicleScreen>:
     name: 'AddVehicleScreen'
-    GridLayout:
-        cols: 2
-        spacing: dp(10)
+    BoxLayout:
+        orientation:'vertical'
         padding: dp(15)
-        row_default_height: dp(50)
+        spacing: dp(10)
         Label:
-            text: 'nazwa pojazdu'
-            size_hint_x: 0.3
-            size_hint_y:None
-        TextInput:
-            hint_text: 'nazwa pojazdu'
-            size_hint_y:None
+            size_hint_y: None
+            size: self.texture_size
+            text: "ADD NEW CAR"
+            halign: "center"
+            font_size: dp(35)
+            text_size: root.width, None
+        GridLayout:
+            cols: 2
+            spacing: dp(10)
+            row_default_height: dp(60)
+            row_force_default: False
+            size_hint: 1,1
+            Label:
+                text: 'Vehicle Name'
+                size_hint: None,None
+                text_size: root.width*0.28, None
+                size: self.texture_size
+                halign: 'left'
+                valign: 'middle'
+                font_size:dp(15)
+                padding: dp(3)
+                canvas.before:
+                    Color:
+                        rgba: [0.5, 0.2, 0.2, 1]
+                    Rectangle:
+                        size: self.size[0], self.size[1]
+                        pos: self.pos
+            TextInput:
+                id: vehicleName
+                hint_text: 'Vehicle Name'
+                size_hint_y: None
+                multiline: False
+                focus: True
+                font_size: dp(15)
+                padding: dp(6)
+        Button:
+            text: 'Add'
+            size_hint: 1,None
+            height: dp(60)
+            on_press: 
+                app.nursery.start_soon(root.add_new_car,vehicleName.text)

@@ -6,11 +6,12 @@ import os
 
 from kivy.factory import Factory
 from kivy.uix.screenmanager import Screen
-from kivy.properties import ListProperty
+from kivy.properties import ListProperty, BooleanProperty
 from kivy_reloader.utils import load_kv_path
 from kivy.app import App
 
 class MainScreen(Screen):
+    db_ready = BooleanProperty(None)
     rows = ListProperty([("id","Loading Data, please wait")])
     async def list_cars(self, dt=0): ##To future self: ALWAYS TRY EXCEPT YOUR CALLS MORON
         try:
@@ -22,17 +23,12 @@ class MainScreen(Screen):
             print("CONNECTED")
         except Exception as e:
             print("Exception", e.args)
-    async def add_new_car(self,dt=0):
-        print("TRYING TO ADD")
-        app : MainApp = App.get_running_app() 
-        try:
-            await app.db_write("managed_vehicles_list",({"vehicle_display_name":"Car1"},))
-            self.rows.append(("*","Car1"))
-            await self.list_cars()
-        except Exception as e:
-            print("Exception", e.args)
+    def on_pre_enter(self, *args):
+        self.on_enter(args)
     def on_enter(self, *args):
         app : MainApp = App.get_running_app()
+        if self.db_ready:
+            app.nursery.start_soon(self.list_cars)
         print("MainScreen on_enter")
 
 main_screen_kv = os.path.join("mobileApp", "screens","main_screen", "main_screen.kv")
