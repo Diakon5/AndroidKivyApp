@@ -75,12 +75,13 @@ class MainApp(App):
         values = await cursor.fetchall()
         return values
     async def db_write(self, table: str, values: tuple[dict[str,str]]):
-        print("ADDING:", values)
+
+        if type(values) != tuple:
+            raise TypeError("'values' must be a tuple containing at least one dictionary")
         cursor = await self.conn.cursor()
         first_dict: set = values[0].keys()
         columns = str.join(", ",first_dict)
         params = str.join(", ",[f":{x}" for x in first_dict])
-        print("parameters:",columns, params)
         #values = self.sanitize(values)
         await cursor.executemany(f"INSERT INTO {table} ({columns}) VALUES ({params});", values)
         await cursor.execute("COMMIT;") #

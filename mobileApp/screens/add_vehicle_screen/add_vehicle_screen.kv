@@ -1,0 +1,18 @@
+#:import join os.path.join
+#:import getcwd os.getcwd
+#:set imageDir join(getcwd(),"mobileApp/images")
+
+<AddVehicleScreen>:
+    name: 'AddVehicleScreen'
+    GridLayout:
+        cols: 2
+        spacing: dp(10)
+        padding: dp(15)
+        row_default_height: dp(50)
+        Label:
+            text: 'nazwa pojazdu'
+            size_hint_x: 0.3
+            size_hint_y:None
+        TextInput:
+            hint_text: 'nazwa pojazdu'
+            size_hint_y:None

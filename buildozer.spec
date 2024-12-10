@@ -94,7 +94,7 @@ fullscreen = 0
 
 # (list) Permissions
 # android.permissions = INTERNET , (name=android.permission.WRITE_EXTERNAL_STORAGE;maxSdkVersion=18),(name=android.permission.READ_EXTERNAL_STORAGE;maxSdkVersion=)
-android.permissions = INTERNET ,
+android.permissions = INTERNET , CAMERA
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host
 

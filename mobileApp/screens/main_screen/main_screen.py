@@ -1,8 +1,7 @@
-import kivy
-if kivy.utils.platform != "android":
-    from typing import TYPE_CHECKING
-    if TYPE_CHECKING:
-        from ...budgetAssistantApp import MainApp
+
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from ...budgetAssistantApp import MainApp
 import os
 
 from kivy.factory import Factory
@@ -27,10 +26,11 @@ class MainScreen(Screen):
         print("TRYING TO ADD")
         app : MainApp = App.get_running_app() 
         try:
+            await app.db_write("managed_vehicles_list",({"vehicle_display_name":"Car1"},))
             self.rows.append(("*","Car1"))
-            await app.db_write("managed_vehicles_list",({"vehicle_display_name":"Car1"}))
+            await self.list_cars()
         except Exception as e:
-            print(e.args)
+            print("Exception", e.args)
     def on_enter(self, *args):
         app : MainApp = App.get_running_app()
         print("MainScreen on_enter")

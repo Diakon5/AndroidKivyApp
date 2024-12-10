@@ -16,7 +16,8 @@
     height: dp(60)
     mainscreen: None
     on_press:
-        app.nursery.start_soon(root.mainscreen.add_new_car)
+        root.mainscreen.manager.current = 'AddVehicleScreen'
+#        app.nursery.start_soon(root.mainscreen.add_new_car)
 
 
 <MainScreen>:
@@ -33,7 +34,7 @@
             size: self.texture_size
             text: "BUDGET ASSISTANT"
             halign: "center"
-            font_size: 35
+            font_size: dp(35)
             text_size: root.width, None
         Image:
             source: join(imageDir,"missing.png")
