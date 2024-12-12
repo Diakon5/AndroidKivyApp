@@ -21,8 +21,6 @@ class MainScreen(Screen):
             print("CONNECTED")
         except Exception as e:
             print("Exception", e.args)
-    def on_pre_enter(self, *args):
-        self.on_enter(args)
     def on_enter(self, *args):
         app : MainApp = App.get_running_app()
         if self.db_ready:

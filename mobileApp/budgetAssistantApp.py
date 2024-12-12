@@ -2,29 +2,18 @@ from kivy_reloader.app import App
 #from kivy.base import async_runTouchApp
 #from kivy.app import App
 #import trio
-from .screens.main_manager import MainManager
+from .screens.nav_manager import NavManager
 from kivy.utils import platform
 from kivy.properties import BooleanProperty
 from kivy.cache import Clock
-import anysqlite as sqlite
+import anysqlite as sqlite ##TODO: Rewrite SQL operations using #SQLAlchemy
 from functools import partial
 from os import getcwd
 from os.path import join
 from .db_schema import schema_version, schema_sql
 
 class MainApp(App):
-
     db_ready = BooleanProperty(False)
-    # async def async_run(self, async_lib="trio"):
-    #     async with trio.open_nursery() as nursery:
-    #         print("pre nursery")
-    #         self.nursery = nursery
-    #         print("post nursery")
-    #         self._run_prepare()
-    #         await async_runTouchApp(async_lib=async_lib)
-    #         self._stop()
-    #         nursery.cancel_scope.cancel()
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.internal_storage_path = join(getcwd(),"debugStorage")
@@ -75,7 +64,6 @@ class MainApp(App):
         values = await cursor.fetchall()
         return values
     async def db_write(self, table: str, values: tuple[dict[str,str]]):
-
         if type(values) != tuple:
             raise TypeError("'values' must be a tuple containing at least one dictionary")
         cursor = await self.conn.cursor()
@@ -85,7 +73,6 @@ class MainApp(App):
         #values = self.sanitize(values)
         await cursor.executemany(f"INSERT INTO {table} ({columns}) VALUES ({params});", values)
         await cursor.execute("COMMIT;") #
-
         await cursor.close()
 
     async def db_edit(self):
@@ -97,4 +84,4 @@ class MainApp(App):
     def build(self):
         Clock.schedule_once(partial(self.nursery.start_soon,self.db_open))
         print("app_build")
-        return MainManager()
+        return NavManager()

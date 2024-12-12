@@ -6,6 +6,8 @@
     t1: ""
     t2: ""
     orientation: 'horizontal'
+    on_press:
+        app.root.navigate_to('DashboardScreen',("vehicle_id",self.t1))
     Label:
         text: root.t1
         halign:'right'
@@ -15,8 +17,7 @@
         text: root.t2
         halign:'left'
         text_size:self.size
-    on_press:
-        app.
+
 <NewCarButton@Button>
     text: "New..."
     size_hint_y: None

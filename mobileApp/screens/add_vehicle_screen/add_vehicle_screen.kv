@@ -49,6 +49,7 @@
                 padding: dp(3)
                 height: self.minimum_height
         Button:
+            disabled: not vehicleName.text_valid
             text: 'Add'
             size_hint: 1,None
             height: dp(60)
