@@ -1,7 +1,7 @@
-from kivy_reloader.app import App
-#from kivy.base import async_runTouchApp
-#from kivy.app import App
-#import trio
+#from kivy_reloader.app import App
+from kivy.base import async_runTouchApp
+from kivy.app import App
+import trio
 from .screens.nav_manager import NavManager
 from kivy.utils import platform
 from kivy.properties import BooleanProperty
@@ -13,6 +13,15 @@ from os.path import join
 from .db_schema import schema_version, schema_sql
 
 class MainApp(App):
+    async def async_run(self, async_lib="trio"):
+        async with trio.open_nursery() as nursery:
+            print("pre nursery")
+            self.nursery = nursery
+            print("post nursery")
+            self._run_prepare()
+            await async_runTouchApp(async_lib=async_lib)
+            self._stop()
+            nursery.cancel_scope.cancel()
     db_ready = BooleanProperty(False)
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

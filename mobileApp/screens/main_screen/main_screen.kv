@@ -11,11 +11,13 @@
     Label:
         text: root.t1
         halign:'right'
+        valign:'center'
         size_hint: .3,1
         text_size:self.size
     Label:
         text: root.t2
         halign:'left'
+        valign:'center'
         text_size:self.size
 
 <NewCarButton@Button>
@@ -56,6 +58,7 @@
             RecycleBoxLayout:
                 default_size: None, dp(60)
                 default_size_hint: 1, None
+                spacing: dp(10)
                 size_hint_y: None
                 height: self.minimum_height
                 orientation: 'vertical'
