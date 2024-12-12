@@ -4,7 +4,9 @@
 
 <DocumentsScreen>:
     name: 'DocumentsScreen'
-
+    db_ready: app.db_ready
+    on_db_ready:
+        app.nursery.start_soon(self.list_documents)
     BoxLayout:
         orientation: 'vertical'
         spacing: dp(10)
@@ -18,21 +20,15 @@
             halign: "left"
             font_size: 25
             text_size: self.width, None
-        ScrollView:
-            BoxLayout:
-                canvas.before:
-                    Color:
-                        rgba: 0.6, 0.4, 0, 1
-                    Rectangle:
-                        size: self.size
-                        pos: self.pos
-                spacing: dp(15)
-                orientation: "vertical"
+        RecycleView:
+            data: [{'widget':"Label","text":"{}".format(document_print_date)} for document_id, document_scan_date, document_print_date, document_sum_cache in root.rows]
+            #{"widget":"NewCarButton","mainscreen":root}
+            # [{'widget':"Label","text":"{}".format(name)} for id, name in root.rows]
+            key_viewclass: "widget"
+            RecycleBoxLayout:
+                default_size: None, dp(60)
+                default_size_hint: 1, None
+                spacing: dp(10)
                 size_hint_y: None
                 height: self.minimum_height
-                Label:
-                    text:"Doc 1"
-                    size_hint: 1, None
-                    text_size: self.width, None
-                    height: dp(40)
-                    
+                orientation: 'vertical'
