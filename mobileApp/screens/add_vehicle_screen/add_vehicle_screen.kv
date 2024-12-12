@@ -1,5 +1,6 @@
 #:import join os.path.join
 #:import getcwd os.getcwd
+# #:import FilteredTextInput mobileApp.comps.filteredTextInput.FilteredTextInput
 #:set imageDir join(getcwd(),"mobileApp/images")
 
 <AddVehicleScreen>:
@@ -25,7 +26,7 @@
                 text: 'Vehicle Name'
                 size_hint: None,None
                 text_size: root.width*0.28, None
-                size: self.texture_size
+                size: self.text_size[0],self.texture_size[1]
                 halign: 'left'
                 valign: 'middle'
                 font_size:dp(15)
@@ -39,11 +40,14 @@
             FilteredTextInput:
                 id: vehicleName
                 hint_text: 'Vehicle Name'
+                accept_empty:False
+                text_validate_unfocus:False
                 size_hint_y: None
                 multiline: False
                 focus: True
                 font_size: dp(15)
-                padding: dp(6)
+                padding: dp(3)
+                height: self.minimum_height
         Button:
             text: 'Add'
             size_hint: 1,None
