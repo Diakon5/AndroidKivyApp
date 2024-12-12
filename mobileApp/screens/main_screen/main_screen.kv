@@ -2,14 +2,21 @@
 #:import getcwd os.getcwd
 #:set imageDir join(getcwd(),"mobileApp/images")
 
-<MyButt@ButtonBehavior+BoxLayout>: #For later
+<CarListButton@ButtonBehavior+BoxLayout>: #For later
     t1: ""
     t2: ""
     orientation: 'horizontal'
     Label:
         text: root.t1
+        halign:'right'
+        size_hint: .3,1
+        text_size:self.size
     Label:
         text: root.t2
+        halign:'left'
+        text_size:self.size
+    on_press:
+        app.
 <NewCarButton@Button>
     text: "New..."
     size_hint_y: None
@@ -41,7 +48,7 @@
             size: self.texture_size
             fit_mode: "contain"
         RecycleView:
-            data: [{'widget':"Label","text":"{}".format(name)} for id, name in root.rows] + [{"widget":"NewCarButton","mainscreen":root}]
+            data: [{'widget':"CarListButton","t1":"{}.".format(id),"t2":"{}".format(name)} for id, name in root.rows] + [{"widget":"NewCarButton","mainscreen":root}]
             #{"widget":"NewCarButton","mainscreen":root}
             # [{'widget':"Label","text":"{}".format(name)} for id, name in root.rows]
             key_viewclass: "widget"
