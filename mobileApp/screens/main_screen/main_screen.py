@@ -3,8 +3,6 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from ...budgetAssistantApp import MainApp
 import os
-
-from kivy.factory import Factory
 from kivy.uix.screenmanager import Screen
 from kivy.properties import ListProperty, BooleanProperty
 from kivy_reloader.utils import load_kv_path
