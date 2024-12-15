@@ -10,7 +10,7 @@ from kivy_reloader.utils import load_kv_path
 
 class DocumentsScreen(Screen):
     db_ready = BooleanProperty(None)
-    rows = ListProperty([("id","Loading Data, please wait")])
+    rows = ListProperty([("id","default1","default2","default3")])
     async def list_documents(self, dt=0): ##To future self: ALWAYS TRY EXCEPT YOUR CALLS MORON
         try:
             print("TRYING TO LIST")

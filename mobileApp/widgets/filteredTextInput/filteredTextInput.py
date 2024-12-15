@@ -1,5 +1,5 @@
 from kivy.uix.textinput import TextInput
-from kivy.lang import Builder
+
 from kivy.properties import BooleanProperty
 import re
 
