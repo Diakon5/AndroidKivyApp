@@ -1,6 +1,7 @@
 #:import join os.path.join
 #:import getcwd os.getcwd
 #:set imageDir join(getcwd(),"mobileApp/images")
+#:import TopBar mobileApp.widgets.top_bar.TopBar
 
 <DashboardScreen>:
     name: 'DashboardScreen'
@@ -11,6 +12,8 @@
         padding: dp(15)
         #size_hint_y: None
         #height: self.minimum_height
+        TopBar:
+        
         Label:
             size_hint_y: None
             size: self.texture_size

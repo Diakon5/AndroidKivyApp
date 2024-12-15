@@ -1,0 +1,25 @@
+#:import join os.path.join
+#:import getcwd os.getcwd
+#:set imageDir join(getcwd(),"mobileApp/images")
+
+<TopBar>:
+    orientation: 'horizontal'
+    height: dp(60)
+    #padding: dp(-10)
+    size_hint: 1, None
+    canvas.before:
+        Color:
+            rgba: [0.5, 0.2, 0.2, 1]
+        Line:
+            points: [self.x, self.y, self.right, self.y]
+            width: 2
+            cap:'none'
+        
+    Button:
+        text: "<--"
+        size_hint_x: 0.2
+        on_press:
+            app.root.back_out()
+    Label:
+        text: ""
+        

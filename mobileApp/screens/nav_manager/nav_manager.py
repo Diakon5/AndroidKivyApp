@@ -12,12 +12,21 @@ class NavManager(ScreenManager):
     def navigate_to(self, screen_name:str, specific_screen_data : tuple[str,]|None = None):
         if not self.has_screen(screen_name):
             raise ScreenManagerException(f"no screen named {screen_name}")
+        print("Navigating from:",self.current_screen.name)
         self.current = screen_name
+        print("Navigating to:",self.current_screen.name)
         self._navigation_stack.append(screen_name)
+        print("Saved previous as:",self._navigation_stack[-1])
         if specific_screen_data is not None:
             self.session_data[specific_screen_data[0]] = specific_screen_data[1]
     def back_out(self, remove_key: str|None = None):
-        self.current = self._navigation_stack.pop()
+        print("Backing out from:",self.current)
+        previous = self._navigation_stack.pop()
+        print("Backing out to:",previous)
+        if self.current == previous:
+            self.current = "MainScreen"
+        else:
+            self.current = previous
         if remove_key is not None:
             self.session_data.pop(remove_key)
 
