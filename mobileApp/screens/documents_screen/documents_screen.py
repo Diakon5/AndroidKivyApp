@@ -24,7 +24,7 @@ class DocumentsScreen(Screen):
     def on_enter(self, *args):
         app : MainApp = App.get_running_app()
         if self.db_ready:
-            app.nursery.start_soon(self.list_cars)
+            app.nursery.start_soon(self.list_documents)
         print("DocumentsScreen on_enter")
 
 documents_screen_kv = os.path.join("mobileApp", "screens","documents_screen", "documents_screen.kv")

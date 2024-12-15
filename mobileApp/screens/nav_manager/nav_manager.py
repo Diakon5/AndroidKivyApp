@@ -13,9 +13,9 @@ class NavManager(ScreenManager):
         if not self.has_screen(screen_name):
             raise ScreenManagerException(f"no screen named {screen_name}")
         print("Navigating from:",self.current_screen.name)
+        self._navigation_stack.append(self.current)
         self.current = screen_name
         print("Navigating to:",self.current_screen.name)
-        self._navigation_stack.append(screen_name)
         print("Saved previous as:",self._navigation_stack[-1])
         if specific_screen_data is not None:
             self.session_data[specific_screen_data[0]] = specific_screen_data[1]

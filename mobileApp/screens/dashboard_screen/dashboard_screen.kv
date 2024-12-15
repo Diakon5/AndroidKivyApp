@@ -40,7 +40,7 @@
                         size_hint: 1, None
                         height: self.width
                         on_press:
-                            root.manager.current = "ExpensesScreen"
+                            app.root.navigate_to("ExpensesScreen")
                     Button:
                         text: "Fuel"
                         size_hint: 1, None
@@ -54,4 +54,4 @@
                         size_hint: 1, None
                         height: self.width
                         on_press:
-                            root.manager.current = "DocumentsScreen"
+                            app.root.navigate_to("DocumentsScreen")
