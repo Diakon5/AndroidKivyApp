@@ -1,38 +1,41 @@
 #:import join os.path.join
 #:import getcwd os.getcwd
 #:set imageDir join(getcwd(),"mobileApp/images")
+#:import TopBar mobileApp.widgets.top_bar.TopBar
 
 <ExpensesScreen>:
     name: 'ExpensesScreen'
-
     BoxLayout:
         orientation: 'vertical'
-        spacing: dp(10)
-        padding: dp(15)
-        #size_hint_y: None
-        #height: self.minimum_height
-        Label:
-            size_hint_y: None
-            size: self.texture_size
-            text: "All Expenses"
-            halign: "left"
-            font_size: 25
-            text_size: self.width, None
-        ScrollView:
-            BoxLayout:
-                canvas:
-                    Color:
-                        rgba: 0.6, 0.4, 0, 1
-                    Rectangle:
-                        size: self.size
-                        pos: self.pos
-                spacing: dp(15)
-                orientation: "vertical"
+        TopBar:
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: dp(10)
+            padding: dp(15)
+            #size_hint_y: None
+            #height: self.minimum_height
+            Label:
                 size_hint_y: None
-                height: self.minimum_height
-                Label:
-                    text:"Goodbye Cost"
-                    size_hint: 1, None
-                    text_size: self.width, None
-                    height: dp(40)
+                size: self.texture_size
+                text: "All Expenses"
+                halign: "left"
+                font_size: 25
+                text_size: self.width, None
+            ScrollView:
+                BoxLayout:
+                    canvas:
+                        Color:
+                            rgba: 0.6, 0.4, 0, 1
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+                    spacing: dp(15)
+                    orientation: "vertical"
+                    size_hint_y: None
+                    height: self.minimum_height
+                    Label:
+                        text:"Goodbye Cost"
+                        size_hint: 1, None
+                        text_size: self.width, None
+                        height: dp(40)
                     

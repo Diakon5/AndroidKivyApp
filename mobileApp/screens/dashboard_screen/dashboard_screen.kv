@@ -5,52 +5,53 @@
 
 <DashboardScreen>:
     name: 'DashboardScreen'
-
     BoxLayout:
         orientation: 'vertical'
-        spacing: dp(10)
-        padding: dp(15)
-        #size_hint_y: None
-        #height: self.minimum_height
         TopBar:
-        
-        Label:
-            size_hint_y: None
-            size: self.texture_size
-            text: "Dashboard"
-            halign: "left"
-            font_size: 25
-            text_size: self.width, None
-        Label:
-            size_hint_y: None
-            size: self.texture_size
-            text: "Dashboard"
-            halign: "left"
-            font_size: 25
-            text_size: self.width, None
-        ScrollView:
-            GridLayout:
-                spacing: dp(15)
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: dp(10)
+            padding: dp(15)
+            #size_hint_y: None
+            #height: self.minimum_height
+
+            Label:
                 size_hint_y: None
-                cols: 2
-                height: self.minimum_height
-                Button:
-                    text: "All"
-                    size_hint: 1, None
-                    height: self.width
-                    on_press:
-                        root.manager.current = "ExpensesScreen"
-                Button:
-                    text: "Fuel"
-                    size_hint: 1, None
-                    height: self.width
-                Button:
-                    text: "Other"
-                    size_hint: 1, None
-                    height: self.width
-                Button:
-                    text: "Documents"
-                    size_hint: 1, None
-                    height: self.width
-                    on_press:
-                        root.manager.current = "DocumentsScreen"
+                size: self.texture_size
+                text: "Dashboard"
+                halign: "left"
+                font_size: 25
+                text_size: self.width, None
+            Label:
+                size_hint_y: None
+                size: self.texture_size
+                text: "Dashboard"
+                halign: "left"
+                font_size: 25
+                text_size: self.width, None
+            ScrollView:
+                GridLayout:
+                    spacing: dp(15)
+                    size_hint_y: None
+                    cols: 2
+                    height: self.minimum_height
+                    Button:
+                        text: "All"
+                        size_hint: 1, None
+                        height: self.width
+                        on_press:
+                            root.manager.current = "ExpensesScreen"
+                    Button:
+                        text: "Fuel"
+                        size_hint: 1, None
+                        height: self.width
+                    Button:
+                        text: "Other"
+                        size_hint: 1, None
+                        height: self.width
+                    Button:
+                        text: "Documents"
+                        size_hint: 1, None
+                        height: self.width
+                        on_press:
+                            root.manager.current = "DocumentsScreen"

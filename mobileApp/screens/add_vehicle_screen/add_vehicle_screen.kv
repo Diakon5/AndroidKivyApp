@@ -1,56 +1,60 @@
 #:import join os.path.join
 #:import getcwd os.getcwd
 #:set imageDir join(getcwd(),"mobileApp/images")
+#:import TopBar mobileApp.widgets.top_bar.TopBar
 
 <AddVehicleScreen>:
     name: 'AddVehicleScreen'
     BoxLayout:
-        orientation:'vertical'
-        padding: dp(15)
-        spacing: dp(10)
-        Label:
-            size_hint_y: None
-            size: self.texture_size
-            text: "ADD NEW CAR"
-            halign: "center"
-            font_size: dp(35)
-            text_size: root.width, None
-        GridLayout:
-            cols: 2
+        orientation: 'vertical'
+        TopBar:
+        BoxLayout:
+            orientation:'vertical'
+            padding: dp(15)
             spacing: dp(10)
-            row_default_height: dp(60)
-            row_force_default: False
-            size_hint: 1,1
             Label:
-                text: 'Vehicle Name'
-                size_hint: None,None
-                text_size: root.width*0.28, None
-                size: self.text_size[0],self.texture_size[1]
-                halign: 'left'
-                valign: 'middle'
-                font_size:dp(15)
-                padding: dp(3)
-                canvas.before:
-                    Color:
-                        rgba: [0.5, 0.2, 0.2, 1]
-                    Rectangle:
-                        size: self.size[0], self.size[1]
-                        pos: self.pos
-            FilteredTextInput:
-                id: vehicleName
-                hint_text: 'Vehicle Name'
-                accept_empty:False
-                text_validate_unfocus:False
                 size_hint_y: None
-                multiline: False
-                focus: True
-                font_size: dp(15)
-                padding: dp(3)
-                height: self.minimum_height
-        Button:
-            disabled: not vehicleName.text_valid
-            text: 'Add'
-            size_hint: 1,None
-            height: dp(60)
-            on_press: 
-                app.nursery.start_soon(root.add_new_car,vehicleName.text)
+                size: self.texture_size
+                text: "ADD NEW CAR"
+                halign: "center"
+                font_size: dp(35)
+                text_size: root.width, None
+            GridLayout:
+                cols: 2
+                spacing: dp(10)
+                row_default_height: dp(60)
+                row_force_default: False
+                size_hint: 1,1
+                Label:
+                    text: 'Vehicle Name'
+                    size_hint: None,None
+                    text_size: root.width*0.28, None
+                    size: self.text_size[0],self.texture_size[1]
+                    halign: 'left'
+                    valign: 'middle'
+                    font_size:dp(15)
+                    padding: dp(3)
+                    canvas.before:
+                        Color:
+                            rgba: [0.5, 0.2, 0.2, 1]
+                        Rectangle:
+                            size: self.size[0], self.size[1]
+                            pos: self.pos
+                FilteredTextInput:
+                    id: vehicleName
+                    hint_text: 'Vehicle Name'
+                    accept_empty:False
+                    text_validate_unfocus:False
+                    size_hint_y: None
+                    multiline: False
+                    focus: True
+                    font_size: dp(15)
+                    padding: dp(3)
+                    height: self.minimum_height
+            Button:
+                disabled: not vehicleName.text_valid
+                text: 'Add'
+                size_hint: 1,None
+                height: dp(60)
+                on_press: 
+                    app.nursery.start_soon(root.add_new_car,vehicleName.text)

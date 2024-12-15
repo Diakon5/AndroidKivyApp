@@ -7,6 +7,7 @@ from kivy.properties import ListProperty, BooleanProperty
 from kivy_reloader.utils import load_kv_path
 from kivy.app import App
 
+
 class MainScreen(Screen):
     db_ready = BooleanProperty(None)
     rows = ListProperty([("id","Loading Data, please wait")])
