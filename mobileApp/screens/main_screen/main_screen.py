@@ -1,7 +1,7 @@
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from ...budgetAssistantApp import MainApp
+    from mobileApp import MainApp
 import os
 from kivy.uix.screenmanager import Screen
 from kivy.properties import ListProperty, BooleanProperty
