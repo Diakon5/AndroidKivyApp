@@ -11,6 +11,7 @@ from functools import partial
 from os import getcwd
 from os.path import join
 from .db_schema import schema_version, schema_sql
+from traceback import format_exception
 
 class MainApp(App):
     async def async_run(self, async_lib="trio"):
@@ -19,7 +20,10 @@ class MainApp(App):
             self.nursery = nursery
             print("post nursery")
             self._run_prepare()
-            await async_runTouchApp(async_lib=async_lib)
+            try:
+                await async_runTouchApp(async_lib=async_lib)
+            except Exception as ex:
+                print("Fatal uncaught exception:",ex,format_exception(ex))
             self._stop()
             nursery.cancel_scope.cancel()
     db_ready = BooleanProperty(False)
