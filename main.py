@@ -1,7 +1,5 @@
 import trio
-
 from mobileApp import MainApp
-
 from kivy.utils import platform
 
 if platform != "android":

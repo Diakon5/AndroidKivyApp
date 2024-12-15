@@ -1,10 +1,9 @@
 import os
-
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from ...budgetAssistantApp import MainApp
 from kivy.uix.screenmanager import Screen
-from ...widgets import FilteredTextInput
+from mobileApp.widgets import FilteredTextInput
 from kivy_reloader.utils import load_kv_path
 from kivy.app import App
 
